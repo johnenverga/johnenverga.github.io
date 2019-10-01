@@ -62,3 +62,25 @@ body{
     /* For smaller screens to not exceed the max screen width */
     max-width: 90%;
   }
+  @media only screen and (max-width: 960px)  {
+    nav {
+        nav {
+            display:none;
+        }
+    }
+}
+#toggleMenu {
+  display: none;
+}
+
+@media only screen and (max-width: 960px)  {
+
+  #toggleMenu {
+    display: block;
+    float: right;
+    line-height: 50px;
+  }
+
+  nav {
+    display:none;
+  }
