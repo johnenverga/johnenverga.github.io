@@ -60,5 +60,5 @@ body{
     width: 960px;
   
     /* For smaller screens to not exceed the max screen width */
-    max-width: 100%;
+    max-width: 90%;
   }
