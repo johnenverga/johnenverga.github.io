@@ -81,9 +81,17 @@ body{
     line-height: 50px;
   }
 
+  header {
+    position: relative;
+}
+
   nav {
-    display:none;
+    position: absolute;
+    display: none;
     background: #000;
+    top: 50px;
+    left: 0;
+    right: 0;
   }
   nav ul li a,
   nav ul li a:link,
