@@ -216,3 +216,7 @@ function moveSpawns(){
 window.addEventListener('keyup', function(){
     game.changeDirection();
   });
+
+  document.getElementById("btnBack").addEventListener('click', function(){
+    location.assign("index.html");
+  });

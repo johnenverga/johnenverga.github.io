@@ -222,4 +222,7 @@ document.getElementById('btnBlue').addEventListener('click', function(){
   draw.setColor('#0000ff');
 }, false);
 
-
+document.getElementById('btnExit').addEventListener('click', function(){
+  //put something to link back to index.html
+  location.assign("index.html");
+}, false);
