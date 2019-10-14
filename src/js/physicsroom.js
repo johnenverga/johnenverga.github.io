@@ -1,0 +1,174 @@
+//thanks to Anatoliy of "Stack Overflow" for this "Random Color" function!
+function getRandomColor() {
+  var letters = '0123456789ABCDEF';
+  var color = '#';
+  for (var i = 0; i < 6; i++) {
+    color += letters[Math.floor(Math.random() * 16)];
+  }
+  return color;
+}
+
+
+var physicssim = (function(){
+
+var c = document.getElementById("physicsroom");
+var ctx = c.getContext("2d");
+
+var animation = null;
+
+//time
+var t = 0;
+
+//time interval in frames
+var delta = 1;
+
+//gravitational acceleration toward bottom of sim/canvas
+var g = 1;
+
+var ball = {
+    
+    //position of ball's center
+        x:50,
+        y:50,
+
+    //radius and color of ball
+    r: 10,
+        filling: getRandomColor(),
+    
+    //direction in radians
+        dir: 0,
+
+    //cosine and sine of angle relative to left wall
+    wallcos: 0,
+    wallsin: 0,
+
+    //new direction after a collision
+    newdir: 0,
+        
+    // Add a speed property to the player this is the number of pixels
+        //the player will move each frame
+        speed: 0,
+
+    //x and y components of ball's speed
+    //vx: speed*Math.cos(dir),
+    vx: 0,
+    vxold: 0,
+    //vy: speed*Math.sin(dir),
+    vy: 0,
+    vyold: 0,
+
+    //bounce velocity
+    bouncex: 0,
+    bouncey: 0,
+
+    //"compression distance" and "bounce" factor, which is a ratio of compression distance and ball diameter.
+    compression: 18,
+    bounce: 1,
+
+    bouncetime: 0
+      }
+
+    return{
+
+    movingBall: function(){
+
+    ball.vxold = ball.vx;
+    ball.vyold = ball.vy;
+
+    ball.speed = Math.sqrt(ball.vxold * ball.vxold + ball.vyold * ball.vyold);
+    ball.dir = Math.atan2(ball.vyold, ball.vxold);
+
+    ball.vx = ball.speed * Math.cos(ball.dir);
+    ball.vy = ball.speed * Math.sin(ball.dir) + g;
+
+    ball.vx = (ball.vx + ball.vxold) / 2;
+    ball.vy = (ball.vy + ball.vyold) / 2;
+
+    
+    //ball.bouncetime = ball.bouncetime + 1;
+    t = t + 1;
+    
+    if(ball.x <= ball.r || ball.x >= (c.width - ball.r) || ball.y <= ball.r || ball.y >= (c.height - ball.r)){
+    this.wallCollision();
+    
+    ball.bounce = ball.compression / (2 * ball.r);
+    ball.bouncex = ball.bounce * ball.speed * Math.cos(ball.dir);
+    ball.bouncey = ball.bounce * ball.speed * Math.sin(ball.dir);
+
+    
+    //Find a way to accurately portray bounces.
+    ball.vx = ball.bouncex;
+    ball.vy = ball.bouncey;
+
+    
+
+    
+    }
+
+    ctx.clearRect(ball.x - (1 + ball.r), ball.y - (1 + ball.r), 2*ball.r + 2, 2*ball.r + 2);
+    
+    ball.x = ball.x + ball.vx;
+    ball.y = ball.y + ball.vy;
+    
+    ctx.beginPath();
+    ctx.arc(ball.x, ball.y, ball.r, 0, 2 * Math.PI);
+    ctx.stroke();
+    ctx.fillStyle = ball.filling;
+    ctx.fill();
+    },
+
+    wallCollision: function(){
+    
+    if(ball.vx == 0 && ball.vy > 0){
+        ball.dir = Math.PI / 2;
+    } else if(ball.vx == 0 && ball.vy < 0) {
+        ball.dir = Math.PI * 3 / 2;
+        
+    } else {
+        ball.dir = Math.atan2(ball.vy,ball.vx);
+    }
+    
+    
+        if(ball.x <= ball.r || ball.x >= (c.width - ball.r)){
+            ball.wallsin = Math.sin(Math.PI - ball.dir);
+            ball.wallcos = Math.cos(Math.PI - ball.dir);
+            //ball.newdir = Math.PI - Math.atan2(ball.vy,ball.vx);
+            ball.dir = Math.PI - ball.dir;
+            ball.filling = getRandomColor();
+        }    
+        if(ball.y <= ball.r || ball.y >= (c.height - ball.r)){
+            ball.wallsin = Math.sin(2 * Math.PI - ball.dir);
+            ball.wallcos = Math.cos(2 * Math.PI - ball.dir);
+            //ball.newdir = Math.atan2(ball.vy,ball.vx);
+            ball.dir = 2 * Math.PI - ball.dir;
+            ball.filling = getRandomColor();
+        }
+    
+    },
+
+    animate: function(){
+
+    this.movingBall();
+    
+    document.getElementById("time").innerText = "time: " + Math.trunc(t/60) + " sec.";
+    animation = window.requestAnimationFrame(this.animate.bind(this));
+    
+    
+    },
+
+    getTime: function(){
+    return t;
+    },
+
+    init: function(){
+    ball.vx = ball.speed * Math.cos(ball.dir);
+    ball.vy = ball.speed * Math.sin(ball.dir) + g;
+
+    this.animate();
+    },
+
+}
+
+})();
+
+physicssim.init();
