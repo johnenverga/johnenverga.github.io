@@ -2,6 +2,16 @@ var attackIcon = document.getElementById("attackimg");
 var blockIcon = document.getElementById("blockimg");
 var grabIcon = document.getElementById("grabimg");
 
+
+var animation = null;
+
+//position of icons
+var yourx = 50;
+var enemyx = 175;
+
+//controls speed of moving icons
+var iconSpeed = 5;
+
 var battlesim = (function(){
 
     //reserved for canvas
@@ -347,6 +357,9 @@ var battlesim = (function(){
 
     battleGraphics: function(){
 
+        ctx.clearRect(yourx, 50, 50, 50);
+        ctx.clearRect(enemyx, 50, 50, 50);
+
         switch(yourchoice){
             case 1:
                 youricon = attackIcon;
@@ -360,7 +373,7 @@ var battlesim = (function(){
             default:
                 document.getElementById("result").innerText = "Oops. Something went wrong....";
         }
-        ctx.drawImage(youricon, 50, 50, 50, 50);
+        ctx.drawImage(youricon, yourx, 50, 50, 50);
         
         switch(enemychoice){
             case 1:
@@ -375,7 +388,9 @@ var battlesim = (function(){
             default:
                 document.getElementById("result").innerText = "Oops. Something went wrong....";
         }
-        ctx.drawImage(enemyicon, 175, 50, 50, 50);
+        ctx.drawImage(enemyicon, enemyx, 50, 50, 50);
+
+        animation = window.requestAnimationFrame(this.battleGraphics.bind(this));
     },
     
     initialize: function(){
