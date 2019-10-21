@@ -1,0 +1,25 @@
+h1 {
+	margin: 10px;
+}
+
+canvas {
+	width: 800px;
+	height: 450px;
+	margin: 10px;
+	background-color: aquamarine;
+}
+
+div {
+	display: flex;
+	align-items: center;
+	margin: 10px;
+}
+
+input {
+	margin: 10px;
+	border: 1px solid black;
+}
+
+img {
+	margin: 10px;
+}
