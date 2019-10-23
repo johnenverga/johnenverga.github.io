@@ -10,7 +10,7 @@ var yourx = 50;
 var enemyx = 175;
 
 //controls speed of moving icons
-var iconSpeed = 5;
+var iconSpeed = 1;
 
 var battlesim = (function(){
 
@@ -357,8 +357,10 @@ var battlesim = (function(){
 
     battleGraphics: function(){
 
-        ctx.clearRect(yourx, 50, 50, 50);
-        ctx.clearRect(enemyx, 50, 50, 50);
+        ctx.clearRect(0, 0, battlecanvas.width, battlecanvas.height);
+
+        yourx = 50;
+        enemyx = 175;
 
         switch(yourchoice){
             case 1:
@@ -390,7 +392,28 @@ var battlesim = (function(){
         }
         ctx.drawImage(enemyicon, enemyx, 50, 50, 50);
 
-        animation = window.requestAnimationFrame(this.battleGraphics.bind(this));
+        
+    },
+
+    movingGraphics: function(){
+
+        ctx.clearRect(yourx - 1, 49, 52, 52);
+        ctx.clearRect(enemyx - 1, 49, 52, 52);
+
+        yourx = yourx + iconSpeed;
+        enemyx = enemyx - iconSpeed;
+        
+        ctx.drawImage(youricon, yourx, 50, 50, 50);
+        ctx.drawImage(enemyicon, enemyx, 50, 50, 50);
+
+        animation = window.requestAnimationFrame(this.movingGraphics.bind(this));
+
+        if(yourx == 85){
+            window.cancelAnimationFrame(animation);
+            disintegrate.init();
+            disintegrate.createSimultaneousParticles(disintegrate.dises);
+            disintegrate.getDisObj(battlecanvas);
+        }
     },
     
     initialize: function(){
@@ -450,6 +473,7 @@ if(battlesim.winCondition() == false)
     battlesim.computerChoice();
     battlesim.battleGraphics();
     battlesim.matchUp();
+    battlesim.movingGraphics();
     battlesim.fillHistory();
     //battlesim.markovChain();
     battlesim.showHP();
