@@ -408,11 +408,11 @@ var battlesim = (function(){
 
         animation = window.requestAnimationFrame(this.movingGraphics.bind(this));
 
-        if(yourx == 85){
+        if(yourx >= 85){
             window.cancelAnimationFrame(animation);
-            disintegrate.init();
-            disintegrate.createSimultaneousParticles(disintegrate.dises);
-            disintegrate.getDisObj(battlecanvas);
+            particleFireworks.getCanvasData(battlecanvas,ctx);
+            particleFireworks.createFireworkParticles(50,50,2,5,10);
+            particleFireworks.showFireworkParticles();
         }
     },
     

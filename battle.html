@@ -6,6 +6,13 @@
 
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 	<link rel="stylesheet" href="src/css/battle.css">
+	  <style>
+  #toggle {
+    width: 100px;
+    height: 100px;
+    background: #ccc;
+  }
+  </style>
     <title>Battle Room</title>
     </head>
     <body>
@@ -41,6 +48,10 @@
 </div>
 <div>
 <p>Disintegrate script from Zach Saucier. <a href="https://css-tricks.com/adding-particle-effects-to-dom-elements-with-canvas/">Link</a></p>
+</div>
+<div id = "toggle"></div>
+<div>
+<p>Another "explode" script from <a href="https://api.jqueryui.com/explode-effect/">jQuery UI.</a></p>
 </div>
 <!--
 <table>
@@ -116,9 +127,14 @@
 	</tr>
 </table>
 -->
-<script src ="src/js/battle.js">
-</script>
-<script src="src/js/disintegrate.js">
+<script src ="src/js/battle.js"></script>
+ <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+ <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+ <script src="src/js/particlefireworks.js"></script>
+<script>
+$( document ).click(function() {
+  $( "#toggle" ).toggle( "explode" );
+});
 </script>
     </body>
 </html>
