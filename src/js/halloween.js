@@ -30,6 +30,10 @@ function halloweenRoom(){
 
     var invincibility = 0;
 
+    //enemy defeat count
+
+    var enemycount = 0;
+
     var animation = null;
     var projectileanimation = null;
     var enemyanimation = null;
@@ -108,6 +112,7 @@ function halloweenRoom(){
 
         this.headsUpDisplay();
         this.pumpkinDamage();
+        this.isGameOver();
         
         animation = window.requestAnimationFrame(this.movePumpkin.bind(this));
         
@@ -243,7 +248,7 @@ function halloweenRoom(){
         if(((x + w) >= ghost.x && x <= (ghost.x + ghost.w) && x >= ghost.x) && 
         ((y + h) >= ghost.y && y <= (ghost.y + ghost.h) && y >= ghost.y) && invincibility <= 0){
             hp = hp - 1;
-            invincibility = 100;
+            invincibility = 50;
         }
         else 
         {
@@ -253,11 +258,20 @@ function halloweenRoom(){
     }
 
     this.headsUpDisplay = function(){
-        document.getElementById("hud").innerHTML = "HP: " + hp;
+        document.getElementById("hud").innerHTML = "HP: " + hp + " Enemies defeated: " + enemycount;
     }
 
 
     this.isGameOver = function(){
+        if(hp <= 0){
+            window.cancelAnimationFrame(animation);
+            window.clearInterval(projectileanimation);
+            window.clearInterval(enemyanimation);
+            gameOver = true;
+        }
+        else {
+            gameOver = false;
+        }
         return gameOver;
     }
 
@@ -291,5 +305,9 @@ room.drawPumpkin();
             room.fireProjectile();
         }
     });
+
+    if(room.isGameOver() == true){
+        document.getElementById("hud").innerHTML = "Game Over! Enemies defeated: " + enemycount;
+    }
 
 //}
