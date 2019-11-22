@@ -1,17 +1,19 @@
 {
-    "name": "johnenverga.github.io",
-    "version": "0.0.0",
-    "private": true,
-    "scripts": {
-      "start": "gulp watch"
-    },
-    "dependencies": {},
-    "devDependencies": {
-      "gulp": "^4.0.2",
-      "gulp-clean-css": "^4.2.0",
-      "gulp-concat": "^2.6.1",
-      "gulp-rename": "^1.4.0",
-      "gulp-sass": "^4.0.2",
-      "gulp-uglify-es": "^1.0.4"
-    }
+  "name": "johnenverga.github.io",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "gulp watch"
+  },
+  "dependencies": {
+    "paper": "^0.12.3"
+  },
+  "devDependencies": {
+    "gulp": "^4.0.2",
+    "gulp-clean-css": "^4.2.0",
+    "gulp-concat": "^2.6.1",
+    "gulp-rename": "^1.4.0",
+    "gulp-sass": "^4.0.2",
+    "gulp-uglify-es": "^1.0.4"
   }
+}

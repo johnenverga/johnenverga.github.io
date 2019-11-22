@@ -1,0 +1,31 @@
+h1 {
+	position: relative;
+	margin: 10px;
+}
+#city {
+	width: 1120px;
+	height: 630px;
+	position: absolute;
+	top: 10px;
+	z-index: 1;
+	margin: 10px;
+}
+
+#citybackground {
+	width: 1120px;
+	height: 630px;
+	position: absolute;
+	top: 10px;
+	z-index: 0;
+	margin: 10px;
+}
+
+#LayeredCanvas {
+	position: relative;
+	margin: 10px;
+}
+
+#Credits {
+	position: relative;
+	top: 700px;
+}
