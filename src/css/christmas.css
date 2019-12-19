@@ -1,0 +1,43 @@
+h1 {
+	position: relative;
+	margin: 10px;
+}
+#christmas {
+	width: 1120px;
+	height: 630px;
+	position: absolute;
+	top: 10px;
+	z-index: 1;
+	margin: 10px;
+}
+
+#christmasbackground {
+	width: 1120px;
+	height: 630px;
+	position: absolute;
+	top: 10px;
+	z-index: 0;
+	margin: 10px;
+}
+
+#LayeredCanvas {
+	position: relative;
+	margin: 10px;
+}
+
+#Buttons {
+	position: relative;
+	margin: 10px;
+	top: 650px;
+}
+
+#Info {
+	position: relative;
+	margin: 10px;
+	top: 700px;
+}
+
+#Credits {
+	position: relative;
+	top: 750px;
+}
